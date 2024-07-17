@@ -12,7 +12,7 @@ class Tree {
     if (array.length === 0) {
       return null;
     }
-    console.log(array);
+
     const mid = Math.floor(array.length / 2);
 
     const node = new Node(array[mid]);
@@ -37,6 +37,22 @@ class Tree {
     if (node.left !== null) {
       this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
+  }
+
+  // Insert all new values as leaf nodes, ignores any duplicate values
+  insert(value, currentNode = this.root) {
+    if (currentNode === null) {
+      const leaf = new Node(value);
+      return leaf;
+    }
+
+    if (value < currentNode.data) {
+      currentNode.left = this.insert(value, currentNode.left);
+    } else if (value > currentNode.data) {
+      currentNode.right = this.insert(value, currentNode.right);
+    }
+
+    return currentNode;
   }
 }
 
