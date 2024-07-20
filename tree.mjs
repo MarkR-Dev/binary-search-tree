@@ -54,6 +54,67 @@ class Tree {
 
     return currentNode;
   }
+
+  delete(value, currentNode = this.root) {
+    // Check for if root node is target to delete
+    if (
+      currentNode !== null &&
+      (currentNode.left === null) & (currentNode.right === null) &&
+      value === currentNode.data
+    ) {
+      this.root = null;
+      return;
+    }
+
+    // Find target value
+    let parent = null;
+    while (currentNode !== null && currentNode.data !== value) {
+      if (value < currentNode.data) {
+        parent = currentNode;
+        currentNode = currentNode.left;
+      } else if (value > currentNode.data) {
+        parent = currentNode;
+        currentNode = currentNode.right;
+      }
+    }
+
+    // Reached a null node meaning value to delete is not in the tree or the tree is empty
+    if (currentNode === null) {
+      return;
+    }
+
+    // First checks if node to remove has 2 children, then 1 child or no children
+    // For two children finds inorder successor and removes it and sets the target to remove as the value of the successor
+    // For one child points the parent to the child of the node to remove
+    // If the value is a leaf simply remove it by setting it's parents pointer to that node to null
+    if (currentNode.left && currentNode.right) {
+      let nextLargest = currentNode.right;
+      while (nextLargest.left !== null) {
+        nextLargest = nextLargest.left;
+      }
+      this.delete(nextLargest.data, this.root);
+      currentNode.data = nextLargest.data;
+    } else if (currentNode.left || currentNode.right) {
+      const child = currentNode.left || currentNode.right;
+
+      if (parent === null) {
+        this.root = child;
+        return;
+      }
+
+      if (parent.left && parent.left.data === value) {
+        parent.left = child;
+      } else {
+        parent.right = child;
+      }
+    } else {
+      if (parent.left && parent.left.data === value) {
+        parent.left = null;
+      } else {
+        parent.right = null;
+      }
+    }
+  }
 }
 
 export default Tree;
