@@ -115,8 +115,12 @@ class Tree {
       }
     }
   }
-  // Remember to set tree.root = tree.deleteRec(n)
-  deleteRec(value, currentNode = this.root) {
+
+  deleteRec(value) {
+    this.root = this.deleteNode(value, this.root);
+  }
+
+  deleteNode(value, currentNode = this.root) {
     // Base case
     if (currentNode === null) {
       return currentNode;
@@ -124,9 +128,9 @@ class Tree {
 
     // Search for node to delete
     if (value < currentNode.data) {
-      currentNode.left = this.deleteRec(value, currentNode.left);
+      currentNode.left = this.deleteNode(value, currentNode.left);
     } else if (value > currentNode.data) {
-      currentNode.right = this.deleteRec(value, currentNode.right);
+      currentNode.right = this.deleteNode(value, currentNode.right);
     } else {
       // Handle case for node having 1 or 0 children
       if (currentNode.left === null) {
@@ -138,7 +142,7 @@ class Tree {
       // Handle case for having 2 children
       currentNode.data = this.minValue(currentNode.right);
 
-      currentNode.right = this.deleteRec(currentNode.data, currentNode.right);
+      currentNode.right = this.deleteNode(currentNode.data, currentNode.right);
     }
 
     return currentNode;
@@ -151,6 +155,18 @@ class Tree {
       node = node.left;
     }
     return minVal;
+  }
+
+  find(value) {
+    let currentNode = this.root;
+    while (currentNode !== null && currentNode.data !== value) {
+      if (value < currentNode.data) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+    }
+    return currentNode;
   }
 }
 

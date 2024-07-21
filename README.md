@@ -6,3 +6,4 @@ A binary search tree project to practice DSA.
 - Print Tree(node)
 - Insert(value, currentNode)
 - Delete(value, currentNode)
+- Find(value)
