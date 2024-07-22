@@ -168,6 +168,32 @@ class Tree {
     }
     return currentNode;
   }
+
+  levelOrder(callback) {
+    let queue = [];
+    let outputArr = [];
+
+    if (this.root) {
+      queue.push(this.root);
+    }
+
+    while (queue.length) {
+      let currentNode = queue.shift();
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+
+      outputArr.push(currentNode.data);
+
+      if (callback) {
+        callback(currentNode);
+      }
+    }
+    return outputArr;
+  }
 }
 
 export default Tree;

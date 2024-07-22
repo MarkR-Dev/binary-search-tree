@@ -7,3 +7,4 @@ A binary search tree project to practice DSA.
 - Insert(value, currentNode)
 - Delete(value, currentNode)
 - Find(value)
+- LevelOrder(callback)
