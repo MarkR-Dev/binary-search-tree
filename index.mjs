@@ -6,4 +6,4 @@ const tree = new Tree(arr);
 
 tree.prettyPrint();
 
-console.log(tree.levelOrder(console.log));
+console.log(tree.levelOrderRec(console.log));

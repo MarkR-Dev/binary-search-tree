@@ -194,6 +194,31 @@ class Tree {
     }
     return outputArr;
   }
+
+  levelOrderRec(callback, queue = [this.root], outputArr = []) {
+    if (queue.length === 0 || this.root === null) {
+      return outputArr;
+    }
+
+    let currentNode = queue.shift();
+
+    if (currentNode.left) {
+      queue.push(currentNode.left);
+    }
+    if (currentNode.right) {
+      queue.push(currentNode.right);
+    }
+
+    outputArr.push(currentNode.data);
+
+    if (callback) {
+      callback(currentNode);
+    }
+
+    this.levelOrderRec(callback, queue, outputArr);
+
+    return outputArr;
+  }
 }
 
 export default Tree;
