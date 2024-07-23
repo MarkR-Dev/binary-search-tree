@@ -139,7 +139,7 @@ class Tree {
         return currentNode.left;
       }
 
-      // Handle case for having 2 children
+      // Handle case for node having 2 children
       currentNode.data = this.minValue(currentNode.right);
 
       currentNode.right = this.deleteNode(currentNode.data, currentNode.right);
@@ -170,8 +170,11 @@ class Tree {
   }
 
   levelOrder(callback) {
+    if (!callback) {
+      throw new Error("A callback function must be provided to levelOrder");
+    }
+
     let queue = [];
-    let outputArr = [];
 
     if (this.root) {
       queue.push(this.root);
@@ -186,18 +189,17 @@ class Tree {
         queue.push(currentNode.right);
       }
 
-      outputArr.push(currentNode.data);
-
-      if (callback) {
-        callback(currentNode);
-      }
+      callback(currentNode);
     }
-    return outputArr;
   }
 
-  levelOrderRec(callback, queue = [this.root], outputArr = []) {
+  levelOrderRec(callback, queue = [this.root]) {
+    if (!callback) {
+      throw new Error("A callback function must be provided to levelOrderRec");
+    }
+
     if (queue.length === 0 || this.root === null) {
-      return outputArr;
+      return;
     }
 
     let currentNode = queue.shift();
@@ -209,15 +211,9 @@ class Tree {
       queue.push(currentNode.right);
     }
 
-    outputArr.push(currentNode.data);
+    callback(currentNode);
 
-    if (callback) {
-      callback(currentNode);
-    }
-
-    this.levelOrderRec(callback, queue, outputArr);
-
-    return outputArr;
+    this.levelOrderRec(callback, queue);
   }
 }
 
