@@ -229,6 +229,34 @@ class Tree {
     this.preOrder(callback, currentNode.left);
     this.preOrder(callback, currentNode.right);
   }
+
+  inOrder(callback, currentNode = this.root) {
+    if (!callback) {
+      throw new Error("A callback function must be provided to preOrder");
+    }
+
+    if (currentNode === null) {
+      return;
+    }
+
+    this.inOrder(callback, currentNode.left);
+    callback(currentNode);
+    this.inOrder(callback, currentNode.right);
+  }
+
+  postOrder(callback, currentNode = this.root) {
+    if (!callback) {
+      throw new Error("A callback function must be provided to preOrder");
+    }
+
+    if (currentNode === null) {
+      return;
+    }
+
+    this.postOrder(callback, currentNode.left);
+    this.postOrder(callback, currentNode.right);
+    callback(currentNode);
+  }
 }
 
 export default Tree;

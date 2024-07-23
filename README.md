@@ -9,3 +9,5 @@ A binary search tree project to practice DSA.
 - Find(value)
 - LevelOrder(callback)
 - PreOrder(callback)
+- InOrder(callback)
+- PostOrder(callback)
