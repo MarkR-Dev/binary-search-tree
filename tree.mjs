@@ -215,6 +215,20 @@ class Tree {
 
     this.levelOrderRec(callback, queue);
   }
+
+  preOrder(callback, currentNode = this.root) {
+    if (!callback) {
+      throw new Error("A callback function must be provided to preOrder");
+    }
+
+    if (currentNode === null) {
+      return;
+    }
+
+    callback(currentNode);
+    this.preOrder(callback, currentNode.left);
+    this.preOrder(callback, currentNode.right);
+  }
 }
 
 export default Tree;

@@ -8,3 +8,4 @@ A binary search tree project to practice DSA.
 - Delete(value, currentNode)
 - Find(value)
 - LevelOrder(callback)
+- PreOrder(callback)
