@@ -275,6 +275,40 @@ class Tree {
 
     return left > right ? left : right;
   }
+
+  depth(node = this.root) {
+    if (node === null) {
+      return 0;
+    }
+
+    let depth = 0;
+    let currentNode = this.root;
+
+    while (currentNode !== node) {
+      if (node.data < currentNode.data) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+      depth++;
+    }
+
+    return depth;
+  }
+
+  depthRec(node, parent = this.root) {
+    if (parent === null || node.data === parent.data) {
+      return 0;
+    }
+
+    if (node.data < parent.data) {
+      return 1 + this.depthRec(node, parent.left);
+    }
+
+    if (node.data > parent.data) {
+      return 1 + this.depthRec(node, parent.right);
+    }
+  }
 }
 
 export default Tree;
