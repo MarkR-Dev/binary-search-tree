@@ -257,6 +257,24 @@ class Tree {
     this.postOrder(callback, currentNode.right);
     callback(currentNode);
   }
+
+  height(currentNode = this.root) {
+    if (currentNode === null) {
+      return 0;
+    }
+
+    let left = 0;
+    let right = 0;
+
+    if (currentNode.left) {
+      left = 1 + this.height(currentNode.left);
+    }
+    if (currentNode.right) {
+      right = 1 + this.height(currentNode.right);
+    }
+
+    return left > right ? left : right;
+  }
 }
 
 export default Tree;

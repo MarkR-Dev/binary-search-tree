@@ -11,3 +11,4 @@ A binary search tree project to practice DSA.
 - PreOrder(callback)
 - InOrder(callback)
 - PostOrder(callback)
+- Height(node)
