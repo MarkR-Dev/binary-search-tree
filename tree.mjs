@@ -260,7 +260,7 @@ class Tree {
 
   height(currentNode = this.root) {
     if (currentNode === null) {
-      return 0;
+      return -1;
     }
 
     let left = 0;
