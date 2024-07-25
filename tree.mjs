@@ -334,6 +334,13 @@ class Tree {
       rightBalanced
     );
   }
+
+  rebalance() {
+    const newArr = [];
+    this.inOrder((node) => newArr.push(node.data));
+
+    this.root = this.buildTree(newArr);
+  }
 }
 
 export default Tree;

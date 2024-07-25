@@ -14,3 +14,4 @@ A binary search tree project to practice DSA.
 - Height(node)
 - Depth(node)
 - IsBalanced
+- Rebalance
