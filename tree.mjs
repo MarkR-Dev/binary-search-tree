@@ -169,6 +169,7 @@ class Tree {
     return currentNode;
   }
 
+  // Uses a queue to implement breadth-first traversal
   levelOrder(callback) {
     if (!callback) {
       throw new Error("A callback function must be provided to levelOrder");
@@ -230,6 +231,7 @@ class Tree {
     this.preOrder(callback, currentNode.right);
   }
 
+  // A balanced tree will output elements in ascending order
   inOrder(callback, currentNode = this.root) {
     if (!callback) {
       throw new Error("A callback function must be provided to preOrder");
@@ -278,7 +280,7 @@ class Tree {
 
   depth(node = this.root) {
     if (node === null) {
-      return 0;
+      return -1;
     }
 
     let depth = 0;
@@ -297,7 +299,11 @@ class Tree {
   }
 
   depthRec(node, parent = this.root) {
-    if (parent === null || node.data === parent.data) {
+    if (parent === null) {
+      return -1;
+    }
+
+    if (node.data === parent.data) {
       return 0;
     }
 
@@ -308,6 +314,25 @@ class Tree {
     if (node.data > parent.data) {
       return 1 + this.depthRec(node, parent.right);
     }
+  }
+
+  // Check every node's height of left and right subtrees,
+  // returns false if any height difference is greater than 1 (imbalanced)
+  isBalanced(root = this.root) {
+    if (root === null) {
+      return true;
+    }
+    const leftSubtreeHeight = this.height(root.left);
+    const rightSubtreeHeight = this.height(root.right);
+
+    const leftBalanced = this.isBalanced(root.left);
+    const rightBalanced = this.isBalanced(root.right);
+
+    return (
+      Math.abs(leftSubtreeHeight - rightSubtreeHeight) <= 1 &&
+      leftBalanced &&
+      rightBalanced
+    );
   }
 }
 

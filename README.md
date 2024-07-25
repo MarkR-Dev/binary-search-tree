@@ -13,3 +13,4 @@ A binary search tree project to practice DSA.
 - PostOrder(callback)
 - Height(node)
 - Depth(node)
+- IsBalanced
